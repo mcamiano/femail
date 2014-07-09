@@ -1,0 +1,26 @@
+#/bin/bash
+
+if [[ ! -p /tmp/_maildump ]] 
+then
+  /bin/rm /tmp/_maildump
+  mkfifo /tmp/_maildump
+fi
+
+if [ -z "$(ps -ef | grep -v grep | grep fakesendmail.sqlite.repo)" ]
+then # sqlite repo daemon is not running
+   nohup ~/bin/fakesendmail.sqlite.repo &
+fi
+
+export args="$*"
+export content=$(/bin/cat -)
+
+(
+  echo "<p class='package'>Message Begin $(date)<br/>" 
+  if [[ ! -z "$args" ]]
+  then 
+    echo "<div><strong>MAIL ARGUMENTS:</strong> $args<div>" 
+  fi
+  echo "<div class='message'>$content</div>" 
+  /bin/cat -
+  echo "<br/>Message End $(date)</p>" 
+) >> /tmp/_maildump &

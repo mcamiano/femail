@@ -1,0 +1,71 @@
+#!/bin/bash
+
+if [[ ! -f /tmp/_fakemailbox ]]
+then
+  cd /tmp
+/usr/bin/sqlite3 /tmp/_fakemailbox <<EOF
+	create table mail ( id INTEGER PRIMARY KEY, message TEXT, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP );
+EOF
+fi
+
+function savemail() {
+/usr/bin/sqlite3 /tmp/_fakemailbox <<EOF
+insert into mail (message) values ("${message}");
+EOF
+}
+
+function getmail() {
+	sql="select * from mail";
+  if [[ ! -z "$1" ]]
+  then
+    sql="$sql where id=$1";
+  fi
+
+(
+/usr/bin/sqlite3 /tmp/_fakemailbox <<EOF
+$sql ;
+EOF
+) |  ( IFS="|"; while read id msg datetime
+do
+  /bin/cat <<EOF | base64 --decode
+  $msg
+EOF
+done
+)
+}
+
+function nukemail() {
+	sql="delete from mail";
+  if [[ ! -z "$1" ]]
+  then
+    sql="$sql where id=$1";
+  fi
+
+/usr/bin/sqlite3 /tmp/_fakemailbox <<EOF
+	$sql
+EOF
+}
+
+if [[ ! -z "$1" ]]
+then # command mode
+
+  case $1 in
+  "show")
+    getmail;
+  ;;
+  "empty")
+    nukemail;
+  ;;
+  "drop")
+    nukemail '$2';
+  ;;
+  esac
+
+  exit
+fi
+
+while true
+do
+  message=$(base64 < /tmp/_maildump)
+  savemail "${message}"
+done
