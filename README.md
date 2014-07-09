@@ -16,3 +16,13 @@ Uses sqlite to store messages in /tmp/_fakemailbox otherwise.
 Uses pdo sqlite to read messages; simple ajax endpoint PHP page provided.
 Uses jquery ajax to poll messages; simple mail reading and deleting PHP page provided.
 
+You can send fake mail at the command line by piping output directly to fakesendmail:
+```
+date | fakesendmail
+```
+
+When you are done, you may want to 
+```
+ps |grep fakesendmail
+```
+and kill the fakesendmail processes you see running.
