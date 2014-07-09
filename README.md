@@ -26,3 +26,19 @@ When you are done, you may want to
 ps |grep fakesendmail
 ```
 and kill the fakesendmail processes you see running.
+
+
+## WARNING
+
+** Secure? Hah! NOT!!! **
+
+**If you use this anywhere near a production site, you are really truly stupid.**
+
+## Copyright
+
+This software is the public domain. No warranties are expressed or implied.
+
+Use this software at your own risk. 
+
+You alone are responsible if you destroy data, property, or your reputation by using this software.
+
