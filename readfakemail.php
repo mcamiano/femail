@@ -8,7 +8,7 @@ $('h2').on('click',function(e) {
     $("#mailbox").fadeOut();
     var items = [];
     $.each( data, function( key, val ) {
-      items.push( "<li data-id='" + val.id + "'><span class='created_at'><div class='killme'>x</div>" +val.created_at +"</span>"+ decodeURIComponent(val.mail) + "</li>" );
+      items.push( "<li data-id='" + val.id + "'><span class='created_at'><div class='killme'>x</div>" +val.created_at +"</span><pre>"+ (val.mail) + "</pre></li>" );
     });
 
     $("#mailbox").html( "<ul>"+items.join("")+"</ul>" );
@@ -26,7 +26,7 @@ $('body').on('click','.killme',function(e) {
     $("#mailbox").fadeOut();
     var items = [];
     $.each( data, function( key, val ) {
-      items.push( "<li data-id='" + val.id + "'><span class='created_at'><div class='killme'>x</div>" +val.created_at +"</span>"+ decodeURIComponent(val.mail) + "</li>" );
+      items.push( "<li data-id='" + val.id + "'><span class='created_at'><div class='killme'>x</div>" +val.created_at +"</span><pre>"+  (val.mail) + "</pre></li>" );
     });
 
     $("#mailbox").html( "<ul>"+items.join("")+"</ul>" );

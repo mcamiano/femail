@@ -34,7 +34,7 @@
       $output[] = array(
         'id'=>$m['id'],
         'created_at'=>$m['created_at'],
-        'mail'=>base64_decode($m['message']),
+        'mail'=>htmlspecialchars(base64_decode($m['message'])),
       );
     }    
     echo json_encode($output);
