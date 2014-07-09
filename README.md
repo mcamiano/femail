@@ -1,3 +1,5 @@
+<img class="emoji" title=":email:" alt=":email:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/2709-fe0f.png" height="60" width="80" align="absmiddle">
+
 A fake sendmail and simple web page client to browse the mail messages not really sent.
 
 To use, edit php.ini and set the sendmail parameter to fakesendmail.
@@ -36,7 +38,7 @@ and kill the fakesendmail processes you see running.
 
 ## Copyright
 
-This software is the public domain. No warranties are expressed or implied.
+THIS SOFTWARE IS IN THE PUBLIC DOMAIN. NO WARRANTIES ARE EXPRESSED OR IMPLIED.
 
 Use this software at your own risk. 
 
